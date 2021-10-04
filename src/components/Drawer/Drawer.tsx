@@ -3,25 +3,30 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 // interfaces
 import { DrawerProps } from './interfaces';
+import { StackProps } from '../../screens/interfaces';
 // styles
 import theme from '../../assets/styles';
 
 const Drawer = (props: DrawerProps) => {
-  const { setShowDrawer } = props;
+  const { setShowDrawer, navigation } = props;
 
   const onPressCloseIcon = () => {
     setShowDrawer(prev => !prev);
   };
 
+  const navigateScreen = (name: keyof StackProps) => {
+    navigation.navigate(name);
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigateScreen('Setting')}>
         <View style={styles.item}>
           <Icon style={styles.icon} name="gear" />
           <Text style={styles.itemText}>Setting</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigateScreen('Profile')}>
         <View style={styles.item}>
           <Icon style={styles.icon} name="user" />
           <Text style={styles.itemText}>Profile</Text>
