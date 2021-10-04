@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
+// components
+import TextWithIcon from '../TextWithIcon/TextWithIcon';
 // interfaces
 import { DrawerProps } from './interfaces';
 import { StackProps } from '../../screens/interfaces';
@@ -18,19 +20,36 @@ const Drawer = (props: DrawerProps) => {
     navigation.navigate(name);
   };
 
+  // * SettingScreen의 리스트와 묶기
   return (
     <View style={styles.container}>
+      {/* Setting */}
       <TouchableOpacity onPress={() => navigateScreen('Setting')}>
-        <View style={styles.item}>
-          <Icon style={styles.icon} name="gear" />
-          <Text style={styles.itemText}>Setting</Text>
-        </View>
+        <TextWithIcon
+          icon={{
+            family: 'EvilIcons',
+            name: 'gear',
+            size: theme.font.xlarge,
+          }}
+          text={{
+            value: 'Setting',
+            size: theme.font.large,
+          }}
+        />
       </TouchableOpacity>
+      {/* Profile */}
       <TouchableOpacity onPress={() => navigateScreen('Profile')}>
-        <View style={styles.item}>
-          <Icon style={styles.icon} name="user" />
-          <Text style={styles.itemText}>Profile</Text>
-        </View>
+        <TextWithIcon
+          icon={{
+            family: 'EvilIcons',
+            name: 'user',
+            size: theme.font.xlarge,
+          }}
+          text={{
+            value: 'Profile',
+            size: theme.font.large,
+          }}
+        />
       </TouchableOpacity>
       <TouchableOpacity onPress={onPressCloseIcon}>
         <View style={{ ...styles.item, ...styles.right }}>

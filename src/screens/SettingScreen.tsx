@@ -1,7 +1,8 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { ScrollView, StyleSheet, View } from 'react-native';
 // import { StackScreenProps } from '@react-navigation/stack';
+// components
+import TextWithIcon from '../components/TextWithIcon/TextWithIcon';
 // interfaces
 // import { StackProps } from './interfaces';
 // styles
@@ -17,45 +18,60 @@ const SettingScreen = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.list}>
-        <View style={styles.listItem}>
-          <Icon
-            name={'account-circle'}
-            size={theme.font.xlarge + 10}
-            color={theme.color.accent2}
-          />
-          <View style={styles.textContainer}>
-            <Text style={styles.itemText}>Account</Text>
-            <Text style={styles.itemDescription}>
-              Everythig regarding your login
-            </Text>
-          </View>
-        </View>
-        <View style={styles.listItem}>
-          <Icon
-            name={'privacy-tip'}
-            size={theme.font.xlarge + 10}
-            color={theme.color.accent}
-          />
-          <View style={styles.textContainer}>
-            <Text style={styles.itemText}>Privacy</Text>
-            <Text style={styles.itemDescription}>
-              Manage your personal health data
-            </Text>
-          </View>
-        </View>
-        <View style={styles.listItem}>
-          <Icon
-            name={'notifications'}
-            size={theme.font.xlarge + 10}
-            color={theme.color.accent3}
-          />
-          <View style={styles.textContainer}>
-            <Text style={styles.itemText}>Notification</Text>
-            <Text style={styles.itemDescription}>
-              Manage communications with Ada
-            </Text>
-          </View>
-        </View>
+        {/* Setting */}
+        <TextWithIcon
+          icon={{
+            family: 'MaterialIcons',
+            name: 'account-circle',
+            size: theme.font.xlarge + 10,
+            color: theme.color.accent,
+          }}
+          text={{
+            value: 'Setting',
+            size: theme.font.large,
+          }}
+          description={{
+            value: 'Everything regarding your login',
+            size: theme.font.xsmall,
+            color: theme.color.gray,
+          }}
+        />
+        {/* Privacy */}
+        <TextWithIcon
+          icon={{
+            family: 'MaterialIcons',
+            name: 'privacy-tip',
+            size: theme.font.xlarge + 10,
+            color: theme.color.accent2,
+          }}
+          text={{
+            value: 'Privacy',
+            size: theme.font.large,
+          }}
+          description={{
+            value: 'Manage your personal health data',
+            size: theme.font.xsmall,
+            color: theme.color.gray,
+          }}
+        />
+        {/* Notification */}
+        <TextWithIcon
+          icon={{
+            family: 'MaterialIcons',
+            name: 'notifications',
+            size: theme.font.xlarge + 10,
+            color: theme.color.accent3,
+          }}
+          text={{
+            value: 'Notification',
+            size: theme.font.large,
+          }}
+          description={{
+            value: 'Manage communications with Ada',
+            size: theme.font.xsmall,
+            color: theme.color.gray,
+          }}
+        />
       </ScrollView>
     </View>
   );
@@ -65,28 +81,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 20,
+    padding: 15,
   },
   list: {
     flex: 1,
   },
   listItem: {
     marginTop: 15,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  textContainer: {
-    marginLeft: 20,
-  },
-  itemText: {
-    fontSize: theme.font.large,
-  },
-  itemDescription: {
-    fontSize: theme.font.xsmall,
-    color: theme.color.gray,
   },
 });
 
