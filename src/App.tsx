@@ -1,127 +1,39 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
-import {
-  Animated,
-  Dimensions,
-  Easing,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-  View,
-} from 'react-native';
-// components
-import Footerbar from './components/FooterBar/FooterBar';
-import Balloon from './components/Balloon/Balloon';
-import Drawer from './components/Drawer/Drawer';
+import { StatusBar, useColorScheme } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // store
 import store from './stores';
+// screens
+import MainScreen from './screens/MainScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import SettingScreen from './screens/SettingScreen';
 // interfaces
-import { Data } from './interfaces/dummyData';
+import { StackProps } from './screens/interfaces';
 // styles
-import theme from './assets/styles';
 import { Provider } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
 
-const DRAWER_WIDTH = Dimensions.get('window').width / 2 + 50;
-const ANIMATION_DURATION = 300;
-const ANIMATION_EASING = Easing.out(Easing.exp);
+const Stack = createNativeStackNavigator<StackProps>();
 
 const App = () => {
   const isDarkMode = useColorScheme();
 
-  const [showDrawer, setShowDrawer] = React.useState(false);
-  const drawerAnimation = React.useRef(new Animated.Value(0)).current;
-
-  React.useEffect(() => {
-    if (showDrawer) {
-      Animated.timing(drawerAnimation, {
-        toValue: -DRAWER_WIDTH,
-        easing: ANIMATION_EASING,
-        duration: ANIMATION_DURATION,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.timing(drawerAnimation, {
-        toValue: 0,
-        easing: ANIMATION_EASING,
-        duration: ANIMATION_DURATION,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [showDrawer, drawerAnimation]);
-
-  const dummyData: Data[] = [
-    {
-      bot: 'Ada provides a general symptom assessment, whatever your symptoms and will also consider Covid-19 where relevant. For up-to-date guidance specific to Covid-19, please use the WHO website.',
-      type: 'button',
-      user: [
-        { display: 'Learn more on the WHO website', payload: 'open who' },
-        { display: 'Continue using Ada', payload: 'coninue' },
-      ],
-    },
-    {
-      bot: 'What is your name?',
-      type: 'input',
-      user: {
-        placeholder: 'write your name',
-      },
-    },
-  ];
-
   return (
     <Provider store={store}>
-      <View
-        style={{
-          ...styles.container,
-        }}>
-        <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
-          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-          <View style={styles.balloonContainer}>
-            {dummyData.map(each => (
-              <Balloon key={each.bot} {...each} />
-            ))}
-          </View>
-          <Footerbar setShowDrawer={setShowDrawer} />
-        </Animated.View>
-        <Animated.View
-          style={{
-            ...styles.drawer,
-            left: Animated.add(drawerAnimation, Dimensions.get('window').width),
-          }}>
-          <Drawer setShowDrawer={setShowDrawer} />
-        </Animated.View>
-      </View>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Main">
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Main"
+            component={MainScreen}
+          />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="Setting" component={SettingScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  main: {
-    flex: 1,
-  },
-  drawer: {
-    height: '100%',
-    position: 'absolute',
-    width: DRAWER_WIDTH,
-    right: -DRAWER_WIDTH,
-  },
-  balloonContainer: {
-    flex: 0.9,
-    justifyContent: 'flex-end',
-    backgroundColor: theme.color.white,
-  },
-});
 
 export default App;
