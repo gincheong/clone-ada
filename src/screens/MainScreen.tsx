@@ -6,13 +6,12 @@ import Footerbar from '../components/FooterBar/FooterBar';
 import Balloon from '../components/Balloon/Balloon';
 import Drawer from '../components/Drawer/Drawer';
 // store
-import store from '../stores';
+import store, { RootState } from '../stores';
 // interfaces
-import { Data } from '../interfaces/dummyData';
 import { StackProps } from './interfaces';
 // styles
 import theme from '../assets/styles';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 
 const DRAWER_WIDTH = Dimensions.get('window').width / 2 + 50;
 const ANIMATION_DURATION = 300;
@@ -21,6 +20,10 @@ const ANIMATION_EASING = Easing.out(Easing.exp);
 const MainScreen = ({ navigation }: StackScreenProps<StackProps, 'Main'>) => {
   const [showDrawer, setShowDrawer] = React.useState(false);
   const drawerAnimation = React.useRef(new Animated.Value(0)).current;
+
+  const balloonState = useSelector((state: RootState) => state.balloonReducer);
+
+  const data = balloonState.data;
 
   React.useEffect(() => {
     if (showDrawer) {
@@ -40,24 +43,6 @@ const MainScreen = ({ navigation }: StackScreenProps<StackProps, 'Main'>) => {
     }
   }, [showDrawer, drawerAnimation]);
 
-  const dummyData: Data[] = [
-    {
-      bot: 'Ada provides a general symptom assessment, whatever your symptoms and will also consider Covid-19 where relevant. For up-to-date guidance specific to Covid-19, please use the WHO website.',
-      type: 'button',
-      user: [
-        { display: 'Learn more on the WHO website', payload: 'open who' },
-        { display: 'Continue using Ada', payload: 'coninue' },
-      ],
-    },
-    {
-      bot: 'What is your name?',
-      type: 'input',
-      user: {
-        placeholder: 'write your name',
-      },
-    },
-  ];
-
   return (
     <Provider store={store}>
       <View
@@ -66,7 +51,7 @@ const MainScreen = ({ navigation }: StackScreenProps<StackProps, 'Main'>) => {
         }}>
         <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
           <View style={styles.balloonContainer}>
-            {dummyData.map(each => (
+            {data.map(each => (
               <Balloon key={each.bot} {...each} />
             ))}
           </View>
