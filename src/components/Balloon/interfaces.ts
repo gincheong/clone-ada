@@ -1,7 +1,11 @@
 // interfaces
-import { Button, Data, Input } from '../../interfaces/dummyData';
+import { Button, Data, Input } from '../../reducers/interfaces';
 
-export type BalloonProps = Data;
+interface Props {
+  viewHeight: number;
+}
+
+export type BalloonProps = Data & Props;
 
 export type UserButtonProps = Button;
 

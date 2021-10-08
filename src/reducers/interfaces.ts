@@ -1,3 +1,10 @@
+export interface balloonState {
+  currentIndex: number;
+  // prevChat?: Data;
+  // currentChat: Data;
+  data: Data[];
+}
+
 export interface Data {
   bot: string;
   user: Button[] | Input;
