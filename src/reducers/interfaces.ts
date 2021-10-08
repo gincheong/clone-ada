@@ -1,5 +1,7 @@
 export interface balloonState {
   currentIndex: number;
+  // prevChat?: Data;
+  // currentChat: Data;
   data: Data[];
 }
 
@@ -9,13 +11,13 @@ export interface Data {
   type: 'button' | 'input';
 }
 
-interface Button {
+export interface Button {
   display: string;
   payload: string;
   placeholder?: never;
 }
 
-interface Input {
+export interface Input {
   display?: never;
   payload?: never;
   placeholder: string;
