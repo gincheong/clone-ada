@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  Animated,
-  Text,
-  StyleSheet,
-  View,
-  Dimensions,
-  Easing,
-} from 'react-native';
+import { Animated, StyleSheet, View, Dimensions, Easing } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 // components
 import Footer from '../components/Footer/Footer';
+import Balloon from '../components/Balloon/Balloon';
 import Drawer from '../components/Drawer/Drawer';
 // interfaces
 import { StackProps } from './interfaces';
@@ -50,7 +44,7 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
     <View style={styles.container}>
       <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
         <View style={styles.balloonContainer}>
-          <Text>asdasd</Text>
+          <Balloon />
         </View>
         <Footer setShowDrawer={setShowDrawer} />
       </Animated.View>
