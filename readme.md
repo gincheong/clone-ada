@@ -14,7 +14,9 @@ yarn start
 
 위 명령어로 로컬 환경에서 앱을 실행하고, 브라우저에 표시되는 QR코드를 통해서 Expo Go 앱으로 실행할 수 있습니다.
 
-혹은 [https://expo.dev/@gincheong/cloneada](https://expo.dev/@gincheong/cloneada) 링크를 통하면, 제가 Publish한 앱을 마찬가지로 Expo Go 앱으로 실행할 수 있습니다. (10/09 21:04)
+혹은 [https://expo.dev/@gincheong/cloneada](https://expo.dev/@gincheong/cloneada) 링크를 통하면, 제가 Publish한 앱을 마찬가지로 Expo Go 앱으로 실행할 수 있습니다.
+
+[7c07fc](https://github.com/gincheong/clone-ada/commit/7c07fc86290411b03698159030bfe9bd440268ae)까지 반영되어 있습니다. (10/10 01:08)
 
 ## 구현사항 (스크린샷)
 
