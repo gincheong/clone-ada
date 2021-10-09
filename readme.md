@@ -22,7 +22,7 @@ yarn start
 
 ### 메인 화면
 
-<img src="./docs/main1.png" height="500px" />
+<img src="./docs/main1.jpg" height="500px" />
 
 ### 사이드바
 
