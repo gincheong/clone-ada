@@ -1,5 +1,5 @@
 export type StackProps = {
-  Profile: undefined;
   Main: undefined;
+  Profile: undefined;
   Setting: undefined;
 };
