@@ -1,59 +1,40 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
-// components
-import TextWithIcon from '../TextWithIcon/TextWithIcon';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 // interfaces
 import { DrawerProps } from './interfaces';
 import { StackProps } from '../../screens/interfaces';
 // styles
-import theme from '../../assets/styles';
+import theme from '../../assets/theme';
 
 const Drawer = (props: DrawerProps) => {
-  const { setShowDrawer, navigation } = props;
+  const { navigation, setShowDrawer } = props;
 
-  const onPressCloseIcon = () => {
-    setShowDrawer(prev => !prev);
+  const onPressClose = () => {
+    setShowDrawer(prevState => !prevState);
   };
 
-  const navigateScreen = (name: keyof StackProps) => {
+  const navigateTo = (name: keyof StackProps) => {
     navigation.navigate(name);
   };
 
-  // * SettingScreen의 리스트와 묶기
   return (
     <View style={styles.container}>
-      {/* Setting */}
-      <TouchableOpacity onPress={() => navigateScreen('Setting')}>
-        <TextWithIcon
-          icon={{
-            family: 'EvilIcons',
-            name: 'gear',
-            size: theme.font.xlarge,
-          }}
-          text={{
-            value: 'Setting',
-            size: theme.font.large,
-          }}
-        />
+      <TouchableOpacity onPress={() => navigateTo('Setting')}>
+        <View style={styles.listItem}>
+          <EvilIcons name="gear" size={theme.font.xlarge} />
+          <Text style={styles.listItemText}>Setting</Text>
+        </View>
       </TouchableOpacity>
-      {/* Profile */}
-      <TouchableOpacity onPress={() => navigateScreen('Profile')}>
-        <TextWithIcon
-          icon={{
-            family: 'EvilIcons',
-            name: 'user',
-            size: theme.font.xlarge,
-          }}
-          text={{
-            value: 'Profile',
-            size: theme.font.large,
-          }}
-        />
+      <TouchableOpacity onPress={() => navigateTo('Profile')}>
+        <View style={styles.listItem}>
+          <EvilIcons name="user" size={theme.font.xlarge} />
+          <Text style={styles.listItemText}>Profile</Text>
+        </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={onPressCloseIcon}>
-        <View style={{ ...styles.item, ...styles.right }}>
-          <Icon style={styles.close} name="close" />
+      <TouchableOpacity onPress={onPressClose}>
+        <View style={[styles.listItem, styles.closeButton]}>
+          <EvilIcons name="close" size={theme.font.xlarge} />
         </View>
       </TouchableOpacity>
     </View>
@@ -66,23 +47,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: theme.color.light,
   },
-  item: {
+  listItem: {
     padding: 20,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  itemText: {
+  listItemText: {
     fontSize: theme.font.normal,
+    marginLeft: 10,
   },
-  icon: {
-    fontSize: theme.font.xlarge,
-    marginRight: 15,
-  },
-  right: {
+  closeButton: {
     alignSelf: 'flex-end',
-  },
-  close: {
-    fontSize: theme.font.xlarge,
   },
 });
 

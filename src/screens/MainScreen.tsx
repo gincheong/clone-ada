@@ -1,30 +1,33 @@
 import React from 'react';
-import { Animated, Dimensions, Easing, StyleSheet, View } from 'react-native';
+import {
+  Animated,
+  Text,
+  StyleSheet,
+  View,
+  Dimensions,
+  Easing,
+} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 // components
-import Footerbar from '../components/FooterBar/FooterBar';
-import Balloon from '../components/Balloon/Balloon';
+import Footer from '../components/Footer/Footer';
 import Drawer from '../components/Drawer/Drawer';
-// store
-import store, { RootState } from '../stores';
 // interfaces
 import { StackProps } from './interfaces';
 // styles
-import theme from '../assets/styles';
-import { Provider, useSelector } from 'react-redux';
+import theme from '../assets/theme';
 
 const DRAWER_WIDTH = Dimensions.get('window').width / 2 + 50;
 const ANIMATION_DURATION = 300;
 const ANIMATION_EASING = Easing.out(Easing.exp);
 
-const MainScreen = ({ navigation }: StackScreenProps<StackProps, 'Main'>) => {
+const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
+  const { navigation } = props;
+
   const [showDrawer, setShowDrawer] = React.useState(false);
+
   const drawerAnimation = React.useRef(new Animated.Value(0)).current;
 
-  const balloonState = useSelector((state: RootState) => state.balloonReducer);
-
-  const data = balloonState.data;
-
+  // * Drawer Animation
   React.useEffect(() => {
     if (showDrawer) {
       Animated.timing(drawerAnimation, {
@@ -44,28 +47,21 @@ const MainScreen = ({ navigation }: StackScreenProps<StackProps, 'Main'>) => {
   }, [showDrawer, drawerAnimation]);
 
   return (
-    <Provider store={store}>
-      <View
+    <View style={styles.container}>
+      <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
+        <View style={styles.balloonContainer}>
+          <Text>asdasd</Text>
+        </View>
+        <Footer setShowDrawer={setShowDrawer} />
+      </Animated.View>
+      <Animated.View
         style={{
-          ...styles.container,
+          ...styles.drawerContainer,
+          left: Animated.add(drawerAnimation, Dimensions.get('window').width),
         }}>
-        <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
-          <View style={styles.balloonContainer}>
-            {data.map(each => (
-              <Balloon key={each.bot} {...each} />
-            ))}
-          </View>
-          <Footerbar setShowDrawer={setShowDrawer} />
-        </Animated.View>
-        <Animated.View
-          style={{
-            ...styles.drawer,
-            left: Animated.add(drawerAnimation, Dimensions.get('window').width),
-          }}>
-          <Drawer setShowDrawer={setShowDrawer} navigation={navigation} />
-        </Animated.View>
-      </View>
-    </Provider>
+        <Drawer navigation={navigation} setShowDrawer={setShowDrawer} />
+      </Animated.View>
+    </View>
   );
 };
 
@@ -77,16 +73,16 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
   },
-  drawer: {
+  balloonContainer: {
+    flex: 0.9,
+    backgroundColor: theme.color.white,
+    justifyContent: 'flex-end',
+  },
+  drawerContainer: {
     height: '100%',
     position: 'absolute',
     width: DRAWER_WIDTH,
     right: -DRAWER_WIDTH,
-  },
-  balloonContainer: {
-    flex: 0.9,
-    justifyContent: 'flex-end',
-    backgroundColor: theme.color.white,
   },
 });
 
