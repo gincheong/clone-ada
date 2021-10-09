@@ -1,16 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+// interfaces
+import { BotProps } from './interfaces';
 // styles
 import theme from '../../assets/theme';
 
-const Bot = () => {
+const Bot = (props: BotProps) => {
+  const { message } = props;
+
   return (
     <View style={styles.container}>
-      <AntDesign name="smile-circle" size={theme.font.xlarge + 20} />
-      <Text style={styles.botText}>
-        The quick brown fox jumps over the lazy dog
-      </Text>
+      <AntDesign
+        name="smile-circle"
+        size={theme.font.xlarge + 20}
+        color={theme.color.accent1}
+      />
+      <Text style={styles.botText}>{message}</Text>
     </View>
   );
 };

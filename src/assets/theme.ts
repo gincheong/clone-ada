@@ -7,7 +7,7 @@ const theme = {
     gray: '#3a3d40',
     lightgray: '#aaa',
     lightdark: '#222',
-    accent: '#db706c',
+    accent1: '#db706c',
     accent2: '#567ace',
     accent3: '#f3aa51',
   },

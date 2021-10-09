@@ -18,7 +18,7 @@ const SettingScreen = ({
           <MaterialIcons
             name="account-circle"
             size={theme.font.xlarge + 10}
-            color={theme.color.accent}
+            color={theme.color.accent1}
           />
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle}>Setting</Text>
