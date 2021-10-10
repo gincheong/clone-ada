@@ -1,5 +1,15 @@
 import React from 'react';
-import { Animated, StyleSheet, View, Dimensions, Easing } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  View,
+  Dimensions,
+  Easing,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 // components
 import Footer from '../components/Footer/Footer';
@@ -41,21 +51,30 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
   }, [showDrawer, drawerAnimation]);
 
   return (
-    <View style={styles.container}>
-      <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
-        <View style={styles.balloonContainer}>
-          <Balloon />
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
+            <View style={styles.balloonContainer}>
+              <Balloon />
+            </View>
+            <Footer setShowDrawer={setShowDrawer} />
+          </Animated.View>
+          <Animated.View
+            style={{
+              ...styles.drawerContainer,
+              left: Animated.add(
+                drawerAnimation,
+                Dimensions.get('window').width,
+              ),
+            }}>
+            <Drawer navigation={navigation} setShowDrawer={setShowDrawer} />
+          </Animated.View>
         </View>
-        <Footer setShowDrawer={setShowDrawer} />
-      </Animated.View>
-      <Animated.View
-        style={{
-          ...styles.drawerContainer,
-          left: Animated.add(drawerAnimation, Dimensions.get('window').width),
-        }}>
-        <Drawer navigation={navigation} setShowDrawer={setShowDrawer} />
-      </Animated.View>
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
