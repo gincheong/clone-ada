@@ -13,6 +13,7 @@ const UserButton = (props: UserButtonProps) => {
   const dispatch = useDispatch();
 
   const onPressButton = (value: string) => {
+    // TODO 입력값 API로 전달해야 한다
     dispatch(BalloonAction.nextConversationStart());
   };
 
