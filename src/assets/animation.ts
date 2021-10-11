@@ -10,7 +10,7 @@ const AnimationPreset = {
     easing: Easing.out(Easing.exp),
   },
   opacity: {
-    duration: 2000,
+    duration: 1000,
     easing: Easing.linear,
   },
   drawer: {

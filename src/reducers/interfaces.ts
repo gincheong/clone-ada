@@ -1,4 +1,9 @@
 export interface BalloonState {
+  // 다음 대화로 이동하는 동안 true
+  onMovingNext: boolean;
+  // 이전 대화로 이동하는 동안 true
+  onMovingPrev: boolean;
+  onLoading: boolean;
   conversationIdx: number;
   conversations: Conversation[];
 }

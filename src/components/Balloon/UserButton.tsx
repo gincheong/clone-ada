@@ -1,21 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 // actions
 import { BalloonAction } from '../../reducers/BalloonSlice';
 // interfaces
 import { UserButtonProps } from './interfaces';
 // styles
 import theme from '../../assets/theme';
-import { useDispatch } from 'react-redux';
 
 const UserButton = (props: UserButtonProps) => {
   const { button } = props;
   const dispatch = useDispatch();
 
   const onPressButton = (value: string) => {
-    // TODO 여기서 누른 버튼 확인,
-    // console.log('누른 버튼: ', value);
-    dispatch(BalloonAction.nextConversation());
+    dispatch(BalloonAction.nextConversationStart());
   };
 
   return (

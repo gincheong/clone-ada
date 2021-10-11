@@ -3,6 +3,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BalloonState, Conversation } from './interfaces';
 
 const initialState: BalloonState = {
+  onMovingNext: false,
+  onMovingPrev: false,
+  onLoading: false,
+  // TODO onError boolean 넣기
   conversationIdx: 0,
   conversations: [
     {
@@ -28,28 +32,28 @@ const BalloonSlice = createSlice({
   name: 'Balloon',
   initialState,
   reducers: {
-    nextConversation: state => {
-      state.conversationIdx++;
-      // api call
-
-      state.conversations[state.conversationIdx] = {
-        bot: `다람쥐 헌 쳇바퀴에 타고파 ${Math.random().toFixed(
-          Math.floor(Math.random() * 10),
-        )}`,
-        user: {
-          type: 'button',
-          data: [
-            {
-              display: 'This is Button 1',
-              value: 'Button 1 value',
-            },
-            {
-              display: 'This is Button 2',
-              value: 'Button 2 value',
-            },
-          ],
-        },
-      };
+    nextConversationStart: state => {
+      state.onLoading = true;
+    },
+    nextConversationSuccess: (state, action: PayloadAction<Conversation>) => {
+      state.onLoading = false;
+      state.onMovingNext = true;
+      state.conversations[++state.conversationIdx] = action.payload;
+    },
+    nextConversationError: state => {
+      state.onLoading = false;
+      console.log('error occured');
+    },
+    nextConversationEnd: state => {
+      state.onMovingNext = false;
+    },
+    prevConversationStart: state => {},
+    prevConversationSuccess: state => {
+      state.onMovingPrev = true;
+    },
+    prevConversationEnd: state => {
+      state.conversations.length = state.conversationIdx--;
+      state.onMovingPrev = false;
     },
   },
 });

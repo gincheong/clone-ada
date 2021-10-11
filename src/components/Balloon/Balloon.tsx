@@ -9,39 +9,63 @@ import { RootState } from '../../stores';
 // animation
 import AnimationPreset from '../../assets/animation';
 
-const WINDOW_WIDTH = Dimensions.get('window').width * 2;
+const WINDOW_HEIGHT = Dimensions.get('window').width;
 
 const Balloon = () => {
-  const { conversationIdx, conversations } = useSelector(
-    (state: RootState) => state.BalloonReducer,
-  );
+  const { conversationIdx, conversations, onMovingPrev, onMovingNext } =
+    useSelector((state: RootState) => state.BalloonReducer);
   const moveAnimation = React.useRef(new Animated.Value(0)).current;
-  const fadeInAnimation = React.useRef(new Animated.Value(0)).current;
+  const fadeInAnimation = React.useRef(new Animated.Value(1)).current;
   const currentConversation = conversations[conversationIdx];
 
-  // * Fade-In Animation
+  // * Moving Next
   React.useEffect(() => {
-    fadeInAnimation.setValue(0);
+    if (onMovingNext) {
+      fadeInAnimation.setValue(0);
 
-    Animated.timing(fadeInAnimation, {
-      toValue: 1,
-      easing: AnimationPreset.opacity.easing,
-      duration: AnimationPreset.opacity.duration,
-      useNativeDriver: false,
-    }).start();
-  }, [fadeInAnimation, conversationIdx]);
+      Animated.timing(fadeInAnimation, {
+        toValue: 1,
+        easing: AnimationPreset.opacity.easing,
+        duration: AnimationPreset.opacity.duration,
+        useNativeDriver: false,
+      }).start();
 
-  // * Move Animation
+      moveAnimation.setValue(-WINDOW_HEIGHT);
+
+      Animated.timing(moveAnimation, {
+        toValue: 0,
+        easing: AnimationPreset.balloon.easing,
+        duration: AnimationPreset.balloon.duration,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [fadeInAnimation, moveAnimation, onMovingNext]);
+
+  // * Moving Prev
   React.useEffect(() => {
-    moveAnimation.setValue(-WINDOW_WIDTH);
+    if (onMovingPrev) {
+      fadeInAnimation.setValue(1);
 
-    Animated.timing(moveAnimation, {
-      toValue: 0,
-      easing: AnimationPreset.balloon.easing,
-      duration: AnimationPreset.balloon.duration,
-      useNativeDriver: false,
-    }).start();
-  }, [moveAnimation, conversationIdx]);
+      Animated.timing(fadeInAnimation, {
+        toValue: 0,
+        easing: AnimationPreset.opacity.easing,
+        duration: AnimationPreset.opacity.duration,
+        useNativeDriver: false,
+      }).start();
+
+      moveAnimation.setValue(0);
+
+      Animated.timing(moveAnimation, {
+        toValue: -WINDOW_HEIGHT,
+        easing: AnimationPreset.balloon.easing,
+        duration: AnimationPreset.balloon.duration,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      moveAnimation.setValue(0);
+      fadeInAnimation.setValue(1);
+    }
+  }, [fadeInAnimation, moveAnimation, onMovingPrev]);
 
   return (
     <Animated.View

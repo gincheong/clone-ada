@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Dimensions, View } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
 // components
 import Bot from './Bot';
@@ -9,36 +9,50 @@ import { RootState } from '../../stores';
 // styles
 import AnimationPreset from '../../assets/animation';
 
-const WINDOW_WIDTH = Dimensions.get('window').height;
+const WINDOW_HEIGHT = Dimensions.get('window').height;
 
 const PrevBalloon = () => {
-  const { conversationIdx, conversations } = useSelector(
-    (state: RootState) => state.BalloonReducer,
-  );
+  const { conversationIdx, conversations, onMovingPrev, onMovingNext } =
+    useSelector((state: RootState) => state.BalloonReducer);
   const moveAnimation = React.useRef(new Animated.Value(0)).current;
   const currentConversation = conversations[conversationIdx - 1];
 
+  // * Moving Prev
   React.useEffect(() => {
-    moveAnimation.setValue(0);
+    if (onMovingPrev) {
+      moveAnimation.setValue(WINDOW_HEIGHT);
 
-    Animated.timing(moveAnimation, {
-      toValue: WINDOW_WIDTH,
-      easing: AnimationPreset.prevBalloon.easing,
-      duration: AnimationPreset.prevBalloon.duration,
-      useNativeDriver: false,
-    }).start();
-  }, [moveAnimation, conversationIdx]);
+      Animated.timing(moveAnimation, {
+        toValue: 0,
+        easing: AnimationPreset.prevBalloon.easing,
+        duration: AnimationPreset.prevBalloon.duration,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      moveAnimation.setValue(0);
+    }
+  }, [moveAnimation, onMovingPrev]);
+
+  // * Moving Next
+  React.useEffect(() => {
+    if (onMovingNext) {
+      moveAnimation.setValue(0);
+
+      Animated.timing(moveAnimation, {
+        toValue: WINDOW_HEIGHT,
+        easing: AnimationPreset.prevBalloon.easing,
+        duration: AnimationPreset.prevBalloon.duration,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [moveAnimation, onMovingNext]);
 
   // 이전 대화가 있는 경우에만 표시함
   return conversationIdx > 0 ? (
-    <View>
-      <Animated.View style={{ right: moveAnimation }}>
-        <Bot message={currentConversation.bot} />
-      </Animated.View>
-      <Animated.View style={{ left: moveAnimation }}>
-        <User message={currentConversation.user} />
-      </Animated.View>
-    </View>
+    <Animated.View style={{ bottom: moveAnimation }}>
+      <Bot message={currentConversation.bot} />
+      <User message={currentConversation.user} />
+    </Animated.View>
   ) : null;
 };
 
