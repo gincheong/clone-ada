@@ -4,7 +4,6 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  Easing,
   KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
@@ -14,15 +13,15 @@ import { StackScreenProps } from '@react-navigation/stack';
 // components
 import Footer from '../components/Footer/Footer';
 import Balloon from '../components/Balloon/Balloon';
+import PrevBalloon from '../components/Balloon/PrevBalloon';
 import Drawer from '../components/Drawer/Drawer';
 // interfaces
 import { StackProps } from './interfaces';
 // styles
 import theme from '../assets/theme';
+import AnimationPreset from '../assets/animation';
 
 const DRAWER_WIDTH = Dimensions.get('window').width / 2 + 50;
-const ANIMATION_DURATION = 300;
-const ANIMATION_EASING = Easing.out(Easing.exp);
 
 const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
   const { navigation } = props;
@@ -36,15 +35,15 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
     if (showDrawer) {
       Animated.timing(drawerAnimation, {
         toValue: -DRAWER_WIDTH,
-        easing: ANIMATION_EASING,
-        duration: ANIMATION_DURATION,
+        easing: AnimationPreset.drawer.easing,
+        duration: AnimationPreset.drawer.duration,
         useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(drawerAnimation, {
         toValue: 0,
-        easing: ANIMATION_EASING,
-        duration: ANIMATION_DURATION,
+        easing: AnimationPreset.drawer.easing,
+        duration: AnimationPreset.drawer.duration,
         useNativeDriver: false,
       }).start();
     }
@@ -58,6 +57,7 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
         <View style={styles.container}>
           <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
             <View style={styles.balloonContainer}>
+              <PrevBalloon />
               <Balloon />
             </View>
             <Footer setShowDrawer={setShowDrawer} />

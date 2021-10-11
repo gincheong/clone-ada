@@ -10,7 +10,7 @@ const Bot = (props: BotProps) => {
   const { message } = props;
 
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container }}>
       <AntDesign
         name="smile-circle"
         size={theme.font.xlarge + 20}
