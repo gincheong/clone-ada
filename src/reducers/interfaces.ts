@@ -1,5 +1,6 @@
 export interface BalloonState {
-  conversation: Conversation[];
+  conversationIdx: number;
+  conversations: Conversation[];
 }
 
 export interface Conversation {
