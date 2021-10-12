@@ -2,12 +2,12 @@ import { Easing } from 'react-native';
 
 const AnimationPreset = {
   balloon: {
-    duration: 3000,
-    easing: Easing.out(Easing.exp),
+    duration: 1500,
+    easing: Easing.out(Easing.ease),
   },
   prevBalloon: {
-    duration: 2000,
-    easing: Easing.out(Easing.exp),
+    duration: 1100,
+    easing: Easing.out(Easing.ease),
   },
   opacity: {
     duration: 1000,
