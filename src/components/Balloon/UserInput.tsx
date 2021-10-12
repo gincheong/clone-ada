@@ -14,9 +14,15 @@ const UserInput = (props: UserInputProps) => {
 
   const [value, setValue] = React.useState<string>('');
 
-  const onSubmit = (value: string) => {
+  const onSubmit = () => {
     // TODO 입력값 API로 전달
-    dispatch(BalloonAction.nextConversationStart('textinput'));
+
+    if (value.trim() === '') {
+      setValue('');
+    } else {
+      // TODO value.trim()한 것 전달
+      dispatch(BalloonAction.nextConversationStart('textinput'));
+    }
   };
 
   return (
@@ -26,7 +32,7 @@ const UserInput = (props: UserInputProps) => {
         placeholder={input.placeholder}
         value={value}
         onChangeText={setValue}
-        onSubmitEditing={() => onSubmit(value)}
+        onSubmitEditing={() => onSubmit()}
         blurOnSubmit={true}
         multiline={true}
       />
