@@ -7,6 +7,7 @@ import {
   select,
   takeLeading,
 } from '@redux-saga/core/effects';
+import { PayloadAction } from '@reduxjs/toolkit';
 // animations
 import AnimationPreset from '../assets/animation';
 import { RootState } from '../stores';
@@ -33,7 +34,7 @@ function* watchPrevConversation() {
   yield takeLeading(BalloonAction.prevConversationStart, prevConversation);
 }
 
-function* nextConversation() {
+function* nextConversation(action: PayloadAction<string>) {
   const { onMovingPrev } = yield* getState('BalloonReducer');
 
   if (onMovingPrev) {
@@ -43,26 +44,43 @@ function* nextConversation() {
   try {
     // TODO 여기서 API call
     yield delay(1000);
-    yield put(
-      BalloonAction.nextConversationSuccess({
-        bot: `다람쥐 헌 쳇바퀴에 타고파 ${Math.random().toFixed(
-          Math.floor(Math.random() * 10),
-        )}`,
-        user: {
-          type: 'button',
-          data: [
-            {
-              display: 'This is Button 1',
-              value: 'Button 1 value',
+
+    if (action.payload !== 'textinput') {
+      yield put(
+        BalloonAction.nextConversationSuccess({
+          bot: `다람쥐 헌 쳇바퀴에 타고파 ${Math.random().toFixed(
+            Math.floor(Math.random() * 10),
+          )}`,
+          user: {
+            type: 'button',
+            data: [
+              {
+                display: 'This is Button 1',
+                value: 'Button 1 value',
+              },
+              {
+                display: 'This is Button 2',
+                value: 'Button 2 value',
+              },
+            ],
+          },
+        }),
+      );
+    } else if (action.payload === 'textinput') {
+      yield put(
+        BalloonAction.nextConversationSuccess({
+          bot: `다람쥐 헌 쳇바퀴에 타고파 ${Math.random().toFixed(
+            Math.floor(Math.random() * 10),
+          )}`,
+          user: {
+            type: 'input',
+            data: {
+              placeholder: 'this is input placeholder',
             },
-            {
-              display: 'This is Button 2',
-              value: 'Button 2 value',
-            },
-          ],
-        },
-      }),
-    );
+          },
+        }),
+      );
+    }
 
     // * 새 대화 전달 후 애니메이션 기다림
     yield delay(AnimationPreset.balloon.duration);
