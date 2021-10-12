@@ -1,17 +1,9 @@
-import { Button, Input, UserData } from '../../reducers/interfaces';
+import { Conversation } from '../../reducers/interfaces';
 
-export interface BotProps {
-  message: string;
-}
+export type BotProps = Conversation;
 
-export interface UserProps {
-  message: UserData;
-}
+export type UserProps = Conversation;
 
-export interface UserButtonProps {
-  button: Button[];
-}
+export type UserButtonProps = Conversation;
 
-export interface UserInputProps {
-  input: Input;
-}
+export type UserInputProps = Conversation;

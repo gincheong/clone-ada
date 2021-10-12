@@ -50,8 +50,8 @@ const PrevBalloon = () => {
   // 이전 대화가 있는 경우에만 표시함
   return conversationIdx > 0 ? (
     <Animated.View style={{ bottom: moveAnimation }}>
-      <Bot message={currentConversation.bot} />
-      <User message={currentConversation.user} />
+      <Bot {...currentConversation} />
+      <User {...currentConversation} />
     </Animated.View>
   ) : null;
 };

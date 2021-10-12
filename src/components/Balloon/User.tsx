@@ -5,21 +5,20 @@ import UserButton from './UserButton';
 import UserInput from './UserInput';
 // interfaces
 import { UserProps } from './interfaces';
-import { Button, Input } from '../../reducers/interfaces';
 // styles
 import theme from '../../assets/theme';
 
 const User = (props: UserProps) => {
   const {
-    message: { data, type },
+    user: { type },
   } = props;
 
   const render = () => {
     switch (type) {
       case 'button':
-        return <UserButton button={data as Button[]} />;
+        return <UserButton {...props} />;
       case 'input':
-        return <UserInput input={data as Input} />;
+        return <UserInput {...props} />;
     }
   };
 

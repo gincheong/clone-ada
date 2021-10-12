@@ -11,6 +11,7 @@ export interface BalloonState {
 export interface Conversation {
   bot: string;
   user: UserData;
+  answer: string;
 }
 
 export interface Button {

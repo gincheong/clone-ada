@@ -7,7 +7,7 @@ import { BotProps } from './interfaces';
 import theme from '../../assets/theme';
 
 const Bot = (props: BotProps) => {
-  const { message } = props;
+  const { bot } = props;
 
   return (
     <View style={{ ...styles.container }}>
@@ -16,7 +16,7 @@ const Bot = (props: BotProps) => {
         size={theme.font.xlarge + 20}
         color={theme.color.accent1}
       />
-      <Text style={styles.botText}>{message}</Text>
+      <Text style={styles.botText}>{bot}</Text>
     </View>
   );
 };

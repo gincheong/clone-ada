@@ -5,23 +5,26 @@ import { useDispatch } from 'react-redux';
 import { BalloonAction } from '../../reducers/BalloonSlice';
 // interfaces
 import { UserInputProps } from './interfaces';
+import { Input } from '../../reducers/interfaces';
 // styles
 import theme from '../../assets/theme';
 
 const UserInput = (props: UserInputProps) => {
-  const { input } = props;
+  const { user, answer } = props;
+  const data = user.data as Input;
   const dispatch = useDispatch();
 
-  const [value, setValue] = React.useState<string>('');
+  const [value, setValue] = React.useState<string>(answer);
+
+  React.useEffect(() => {
+    setValue(answer);
+  }, [user]);
 
   const onSubmit = () => {
-    // TODO 입력값 API로 전달
-
     if (value.trim() === '') {
       setValue('');
     } else {
-      // TODO value.trim()한 것 전달
-      dispatch(BalloonAction.nextConversationStart('textinput'));
+      dispatch(BalloonAction.nextConversationStart(value.trim()));
     }
   };
 
@@ -29,7 +32,7 @@ const UserInput = (props: UserInputProps) => {
     <View>
       <TextInput
         style={styles.input}
-        placeholder={input.placeholder}
+        placeholder={data.placeholder}
         value={value}
         onChangeText={setValue}
         onSubmitEditing={() => onSubmit()}

@@ -43,9 +43,12 @@ function* nextConversation(action: PayloadAction<string>) {
 
   try {
     // TODO 여기서 API call
+    // TODO action.payload에 응답값 string으로 있음
+
     yield delay(1000);
 
-    if (action.payload !== 'textinput') {
+    const randomNumber = Math.round(Math.random());
+    if (randomNumber === 1) {
       yield put(
         BalloonAction.nextConversationSuccess({
           bot: `다람쥐 헌 쳇바퀴에 타고파 ${Math.random().toFixed(
@@ -64,9 +67,10 @@ function* nextConversation(action: PayloadAction<string>) {
               },
             ],
           },
+          answer: '',
         }),
       );
-    } else if (action.payload === 'textinput') {
+    } else if (randomNumber === 0) {
       yield put(
         BalloonAction.nextConversationSuccess({
           bot: `다람쥐 헌 쳇바퀴에 타고파 ${Math.random().toFixed(
@@ -78,6 +82,7 @@ function* nextConversation(action: PayloadAction<string>) {
               placeholder: 'this is input placeholder',
             },
           },
+          answer: '',
         }),
       );
     }

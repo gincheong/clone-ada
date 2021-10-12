@@ -74,8 +74,8 @@ const Balloon = () => {
         opacity: fadeInAnimation,
         bottom: moveAnimation,
       }}>
-      <Bot message={currentConversation.bot} />
-      <User message={currentConversation.user} />
+      <Bot {...currentConversation} />
+      <User {...currentConversation} />
     </Animated.View>
   );
 };

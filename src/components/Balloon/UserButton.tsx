@@ -5,11 +5,13 @@ import { useDispatch } from 'react-redux';
 import { BalloonAction } from '../../reducers/BalloonSlice';
 // interfaces
 import { UserButtonProps } from './interfaces';
+import { Button } from '../../reducers/interfaces';
 // styles
 import theme from '../../assets/theme';
 
 const UserButton = (props: UserButtonProps) => {
-  const { button } = props;
+  const { user } = props;
+  const data = user.data as Button[];
   const dispatch = useDispatch();
 
   const onPressButton = (value: string) => {
@@ -19,7 +21,7 @@ const UserButton = (props: UserButtonProps) => {
 
   return (
     <View>
-      {button.map((each, idx) => (
+      {data.map((each, idx) => (
         <View key={each.value + idx}>
           <TouchableOpacity
             style={styles.button}
