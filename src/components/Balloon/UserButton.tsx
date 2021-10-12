@@ -14,7 +14,7 @@ const UserButton = (props: UserButtonProps) => {
 
   const onPressButton = (value: string) => {
     // TODO 입력값 API로 전달해야 한다
-    dispatch(BalloonAction.nextConversationStart());
+    dispatch(BalloonAction.nextConversationStart(value));
   };
 
   return (
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.color.accent2,
     borderRadius: 15,
-    width: '100%',
+    maxWidth: '100%',
     alignSelf: 'flex-end',
   },
   text: {

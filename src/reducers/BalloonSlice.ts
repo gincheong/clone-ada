@@ -15,12 +15,12 @@ const initialState: BalloonState = {
         type: 'button',
         data: [
           {
-            display: 'This is Button 1',
-            value: 'Button 1 value',
+            display: 'Show Buttons',
+            value: 'buttons',
           },
           {
-            display: 'This is Button 2',
-            value: 'Button 2 value',
+            display: 'Show TextInput',
+            value: 'textinput',
           },
         ],
       },
@@ -32,7 +32,7 @@ const BalloonSlice = createSlice({
   name: 'Balloon',
   initialState,
   reducers: {
-    nextConversationStart: state => {
+    nextConversationStart: (state, action: PayloadAction<string>) => {
       state.onLoading = true;
     },
     nextConversationSuccess: (state, action: PayloadAction<Conversation>) => {
