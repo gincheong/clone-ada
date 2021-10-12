@@ -17,9 +17,11 @@ function* getState(reducer: keyof RootState) {
 }
 
 function* prevConversation() {
-  const balloonState = yield* getState('BalloonReducer');
+  const { conversationIdx, onLoading, onMovingNext } = yield* getState(
+    'BalloonReducer',
+  );
 
-  if (balloonState.conversationIdx > 0) {
+  if (conversationIdx > 0 && !onLoading && !onMovingNext) {
     yield put(BalloonAction.prevConversationSuccess());
     yield delay(AnimationPreset.prevBalloon.duration);
 
@@ -32,6 +34,12 @@ function* watchPrevConversation() {
 }
 
 function* nextConversation() {
+  const { onMovingPrev } = yield* getState('BalloonReducer');
+
+  if (onMovingPrev) {
+    return;
+  }
+
   try {
     // TODO 여기서 API call
     yield delay(1000);

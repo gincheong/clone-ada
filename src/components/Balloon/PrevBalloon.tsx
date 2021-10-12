@@ -29,7 +29,7 @@ const PrevBalloon = () => {
         useNativeDriver: false,
       }).start();
     } else {
-      moveAnimation.setValue(0);
+      moveAnimation.setValue(WINDOW_HEIGHT);
     }
   }, [moveAnimation, onMovingPrev]);
 
