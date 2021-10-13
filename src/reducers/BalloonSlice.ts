@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // interfaces
-import { BalloonState, Conversation } from './interfaces';
+import { BalloonState, Conversation } from './BalloonInterfaces';
 
 const initialState: BalloonState = {
   onMovingNext: false,

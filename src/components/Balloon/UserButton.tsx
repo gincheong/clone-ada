@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { BalloonAction } from '../../reducers/BalloonSlice';
 // interfaces
 import { UserButtonProps } from './interfaces';
-import { Button } from '../../reducers/interfaces';
+import { Button } from '../../reducers/BalloonInterfaces';
 // styles
 import theme from '../../assets/theme';
 
