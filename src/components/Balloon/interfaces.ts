@@ -1,4 +1,4 @@
-import { Conversation } from '../../reducers/interfaces';
+import { Conversation } from '../../reducers/BalloonInterfaces';
 
 export type BotProps = Conversation;
 

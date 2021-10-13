@@ -3,6 +3,7 @@ import createSagaMiddleware from '@redux-saga/core';
 import { all, call } from '@redux-saga/core/effects';
 // reducers
 import { BalloonReducer } from '../reducers/BalloonSlice';
+import { DrawerReducer } from '../reducers/DrawerSlice';
 // sagas
 import BalloonSaga from '../sagas/BalloonSaga';
 
@@ -15,6 +16,7 @@ function* rootSaga() {
 const store = configureStore({
   reducer: {
     BalloonReducer,
+    DrawerReducer,
   },
   middleware: [sagaMiddleware],
 });

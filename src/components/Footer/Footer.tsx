@@ -10,19 +10,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 // actions
 import { BalloonAction } from '../../reducers/BalloonSlice';
+import { DrawerAction } from '../../reducers/DrawerSlice';
 // interfaces
-import { FooterProps } from './interfaces';
 import { RootState } from '../../stores';
 // styles
 import theme from '../../assets/theme';
 
-const Footer = (props: FooterProps) => {
+const Footer = () => {
   const { onLoading } = useSelector((state: RootState) => state.BalloonReducer);
-  const { setShowDrawer } = props;
+  const { isOpened } = useSelector((state: RootState) => state.DrawerReducer);
   const dispatch = useDispatch();
 
   const onPressMenu = () => {
-    setShowDrawer(prevState => !prevState);
+    if (isOpened) {
+      dispatch(DrawerAction.closeDrawer());
+    } else {
+      dispatch(DrawerAction.openDrawer());
+    }
   };
 
   const onPressUndo = () => {

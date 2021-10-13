@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+// actions
+import { DrawerAction } from '../../reducers/DrawerSlice';
 // interfaces
 import { DrawerProps } from './interfaces';
 import { StackProps } from '../../screens/interfaces';
@@ -8,10 +11,11 @@ import { StackProps } from '../../screens/interfaces';
 import theme from '../../assets/theme';
 
 const Drawer = (props: DrawerProps) => {
-  const { navigation, setShowDrawer } = props;
+  const dispatch = useDispatch();
+  const { navigation } = props;
 
   const onPressClose = () => {
-    setShowDrawer(prevState => !prevState);
+    dispatch(DrawerAction.closeDrawer());
   };
 
   const navigateTo = (name: keyof StackProps) => {

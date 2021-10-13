@@ -10,13 +10,17 @@ import {
   Keyboard,
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
+import { useDispatch, useSelector } from 'react-redux';
 // components
 import Footer from '../components/Footer/Footer';
 import Balloon from '../components/Balloon/Balloon';
 import PrevBalloon from '../components/Balloon/PrevBalloon';
 import Drawer from '../components/Drawer/Drawer';
+// actions
+import { DrawerAction } from '../reducers/DrawerSlice';
 // interfaces
 import { StackProps } from './interfaces';
+import { RootState } from '../stores';
 // styles
 import theme from '../assets/theme';
 import AnimationPreset from '../assets/animation';
@@ -24,15 +28,21 @@ import AnimationPreset from '../assets/animation';
 const DRAWER_WIDTH = Dimensions.get('window').width / 2 + 50;
 
 const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
+  const { isOpened } = useSelector((state: RootState) => state.DrawerReducer);
+  const dispatch = useDispatch();
   const { navigation } = props;
-
-  const [showDrawer, setShowDrawer] = React.useState(false);
 
   const drawerAnimation = React.useRef(new Animated.Value(0)).current;
 
+  const closeDrawer = () => {
+    if (isOpened) {
+      dispatch(DrawerAction.closeDrawer());
+    }
+  };
+
   // * Drawer Animation
   React.useEffect(() => {
-    if (showDrawer) {
+    if (isOpened) {
       Animated.timing(drawerAnimation, {
         toValue: -DRAWER_WIDTH,
         easing: AnimationPreset.drawer.easing,
@@ -47,7 +57,7 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
         useNativeDriver: false,
       }).start();
     }
-  }, [showDrawer, drawerAnimation]);
+  }, [isOpened, drawerAnimation]);
 
   return (
     <KeyboardAvoidingView
@@ -56,11 +66,16 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
+            {isOpened ? (
+              <TouchableWithoutFeedback onPress={closeDrawer}>
+                <View style={styles.hidden}></View>
+              </TouchableWithoutFeedback>
+            ) : null}
             <View style={styles.balloonContainer}>
               <PrevBalloon />
               <Balloon />
             </View>
-            <Footer setShowDrawer={setShowDrawer} />
+            <Footer />
           </Animated.View>
           <Animated.View
             style={{
@@ -70,7 +85,7 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
                 Dimensions.get('window').width,
               ),
             }}>
-            <Drawer navigation={navigation} setShowDrawer={setShowDrawer} />
+            <Drawer navigation={navigation} />
           </Animated.View>
         </View>
       </TouchableWithoutFeedback>
@@ -82,6 +97,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
+  },
+  hidden: {
+    position: 'absolute',
+    width: '100%',
+    height: '90%',
+    left: 0,
+    top: 0,
+    zIndex: 9999,
   },
   main: {
     flex: 1,
