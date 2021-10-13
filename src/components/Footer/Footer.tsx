@@ -1,15 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 // actions
 import { BalloonAction } from '../../reducers/BalloonSlice';
 // interfaces
 import { FooterProps } from './interfaces';
+import { RootState } from '../../stores';
 // styles
 import theme from '../../assets/theme';
 
 const Footer = (props: FooterProps) => {
+  const { onLoading } = useSelector((state: RootState) => state.BalloonReducer);
   const { setShowDrawer } = props;
   const dispatch = useDispatch();
 
@@ -24,9 +32,13 @@ const Footer = (props: FooterProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>ada</Text>
-      <TouchableOpacity onPress={onPressUndo}>
-        <EvilIcons name="undo" size={theme.font.xlarge} />
-      </TouchableOpacity>
+      {onLoading ? (
+        <ActivityIndicator style={styles.indicator} />
+      ) : (
+        <TouchableOpacity onPress={onPressUndo}>
+          <EvilIcons name="undo" size={theme.font.xlarge} />
+        </TouchableOpacity>
+      )}
       <TouchableOpacity onPress={onPressMenu}>
         <Text style={styles.text}>
           <EvilIcons name="navicon" size={theme.font.xlarge} />
@@ -47,6 +59,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: theme.font.normal,
     marginHorizontal: 20,
+  },
+  indicator: {
+    position: 'absolute',
+    left: '50%',
+    right: '100%',
   },
 });
 
