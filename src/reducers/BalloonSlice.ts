@@ -47,6 +47,7 @@ const BalloonSlice = createSlice({
       console.log('error occured');
     },
     nextConversationEnd: state => {
+      state.onLoading = false;
       state.onMovingNext = false;
     },
     prevConversationStart: state => {},
