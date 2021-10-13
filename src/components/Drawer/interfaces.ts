@@ -3,6 +3,5 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { StackProps } from '../../screens/interfaces';
 
 export interface DrawerProps {
-  setShowDrawer: React.Dispatch<React.SetStateAction<boolean>>;
   navigation: StackNavigationProp<StackProps, 'Main'>;
 }
