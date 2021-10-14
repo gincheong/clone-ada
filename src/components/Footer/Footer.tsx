@@ -24,7 +24,7 @@ const Footer = () => {
   const onPressMenu = () => {
     if (isOpened) {
       dispatch(DrawerAction.closeDrawer());
-    } else {
+    } else if (!onLoading) {
       dispatch(DrawerAction.openDrawer());
     }
   };
