@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 // actions
 import { DrawerAction } from '../../reducers/DrawerSlice';
+import { BalloonAction } from '../../reducers/BalloonSlice';
 // interfaces
 import { DrawerProps } from './interfaces';
 import { StackProps } from '../../screens/interfaces';
@@ -16,6 +17,20 @@ const Drawer = (props: DrawerProps) => {
 
   const onPressClose = () => {
     dispatch(DrawerAction.closeDrawer());
+  };
+
+  const restartConversation = () => {
+    Alert.alert('Warning', 'Restart Conversation', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Ok',
+        onPress: () => {
+          dispatch(BalloonAction.restartConversation());
+          onPressClose();
+        },
+        style: 'destructive',
+      },
+    ]);
   };
 
   const navigateTo = (name: keyof StackProps) => {
@@ -34,6 +49,18 @@ const Drawer = (props: DrawerProps) => {
         <View style={styles.listItem}>
           <EvilIcons name="user" size={theme.font.xlarge} />
           <Text style={styles.listItemText}>Profile</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={restartConversation}>
+        <View style={styles.listItem}>
+          <EvilIcons
+            name="refresh"
+            size={theme.font.xlarge}
+            color={theme.color.accent1}
+          />
+          <Text style={{ ...styles.listItemText, color: theme.color.accent1 }}>
+            Restart
+          </Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={onPressClose}>

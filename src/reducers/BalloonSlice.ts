@@ -58,6 +58,9 @@ const BalloonSlice = createSlice({
       state.conversations.length = state.conversationIdx--;
       state.onMovingPrev = false;
     },
+    restartConversation: state => {
+      return { ...initialState };
+    },
   },
 });
 
