@@ -10,6 +10,7 @@ import store from './src/stores';
 import MainScreen from './src/screens/MainScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import SettingScreen from './src/screens/SettingScreen';
+import LanguageScreen from './src/screens/SettingScreen/LanguageScreen';
 // interfaces
 import { StackProps } from './src/screens/interfaces';
 
@@ -28,6 +29,7 @@ export default function App() {
           />
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Setting" component={SettingScreen} />
+          <Stack.Screen name="Language" component={LanguageScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
