@@ -3,14 +3,21 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useGlobalize } from 'react-native-globalize';
 // interfaces
 import { StackProps } from './interfaces';
+// globalize
+import loadSettingMessages from '../globalize/SettingMessages';
 // styles
 import theme from '../assets/theme';
+
+loadSettingMessages();
 
 const SettingScreen = ({
   navigation,
 }: StackScreenProps<StackProps, 'Setting'>) => {
+  const { formatMessage } = useGlobalize();
+
   return (
     <View style={styles.container}>
       {/* Setting */}
@@ -22,9 +29,11 @@ const SettingScreen = ({
             color={theme.color.accent1}
           />
           <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle}>Setting</Text>
+            <Text style={styles.listItemTitle}>
+              {formatMessage('setting/setting')}
+            </Text>
             <Text style={styles.listItemDescription}>
-              Everything regarding your login
+              {formatMessage('setting/settingDesc')}
             </Text>
           </View>
         </View>
@@ -38,9 +47,11 @@ const SettingScreen = ({
             color={theme.color.accent2}
           />
           <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle}>Privacy</Text>
+            <Text style={styles.listItemTitle}>
+              {formatMessage('setting/privacy')}
+            </Text>
             <Text style={styles.listItemDescription}>
-              Manage your personal health data
+              {formatMessage('setting/privacyDesc')}
             </Text>
           </View>
         </View>
@@ -54,9 +65,11 @@ const SettingScreen = ({
             color={theme.color.accent3}
           />
           <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle}>Notification</Text>
+            <Text style={styles.listItemTitle}>
+              {formatMessage('setting/notification')}
+            </Text>
             <Text style={styles.listItemDescription}>
-              Manage communications with Ada
+              {formatMessage('setting/notificationDesc')}
             </Text>
           </View>
         </View>
@@ -70,9 +83,11 @@ const SettingScreen = ({
             color={theme.color.dark}
           />
           <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle}>Language</Text>
+            <Text style={styles.listItemTitle}>
+              {formatMessage('setting/language')}
+            </Text>
             <Text style={styles.listItemDescription}>
-              Change Ada's Language
+              {formatMessage('setting/languageDesc')}
             </Text>
           </View>
         </View>
