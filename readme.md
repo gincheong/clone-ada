@@ -16,7 +16,7 @@ yarn start
 
 혹은 [https://expo.dev/@gincheong/cloneada](https://expo.dev/@gincheong/cloneada) 링크를 통하면, 제가 Publish한 앱을 마찬가지로 Expo Go 앱으로 실행할 수 있습니다.
 
-[d85c341](https://github.com/gincheong/clone-ada/commit/d85c341df63233a0727298a9dd3af9e5a737cfcf)까지 반영되어 있습니다. (10/16 12:12)
+[7d73f81](https://github.com/gincheong/clone-ada/commit/7d73f8154e217b3e33eff7f188938b42b2f40de7)까지 반영되어 있습니다. (10/19 22:39)
 
 ## 구현사항 (스크린샷)
 
@@ -33,3 +33,7 @@ yarn start
 <img src="./docs/conversation1.gif" height="500px" />
 
 버튼/텍스트박스 입력 시에, 고정 수치의 딜레이를 넣은 상태입니다.
+
+### 언어 변경
+
+<img src="./docs/language1.gif" height="500px" />
