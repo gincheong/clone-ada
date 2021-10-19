@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 // interfaces
 import { StackProps } from './interfaces';
 // styles
@@ -56,6 +57,22 @@ const SettingScreen = ({
             <Text style={styles.listItemTitle}>Notification</Text>
             <Text style={styles.listItemDescription}>
               Manage communications with Ada
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+      {/* Language */}
+      <TouchableOpacity onPress={() => navigation.navigate('Language')}>
+        <View style={styles.listItem}>
+          <MaterialCommunityIcons
+            name="alphabet-latin"
+            size={theme.font.xlarge + 10}
+            color={theme.color.dark}
+          />
+          <View style={styles.listItemTextContainer}>
+            <Text style={styles.listItemTitle}>Language</Text>
+            <Text style={styles.listItemDescription}>
+              Change Ada's Language
             </Text>
           </View>
         </View>
