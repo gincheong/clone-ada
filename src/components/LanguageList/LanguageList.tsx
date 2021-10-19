@@ -6,7 +6,6 @@ import LanguageListItem from './LanguageListItem';
 import HorizontalRule from '../HorizontalRule/HorizontalRule';
 // interfaces
 import { languages } from '../../reducers/LocaleInterfaces';
-import { RootState } from '../../stores';
 // styles
 import theme from '../../assets/theme';
 
