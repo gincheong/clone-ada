@@ -1,12 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { View } from 'react-native';
 // components
 import LanguageListItem from './LanguageListItem';
 import HorizontalRule from '../HorizontalRule/HorizontalRule';
 // interfaces
 import { languages } from '../../reducers/LocaleInterfaces';
-import { RootState } from '../../stores';
 // styles
 import theme from '../../assets/theme';
 
