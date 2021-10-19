@@ -4,6 +4,7 @@ const loadScreenMessages = () => {
   loadMessages({
     en: {
       screen: {
+        main: 'Main',
         profile: 'Profile',
         setting: 'Setting',
         language: 'Language',
@@ -11,6 +12,7 @@ const loadScreenMessages = () => {
     },
     ko: {
       screen: {
+        main: '메인',
         profile: '프로필',
         setting: '환경설정',
         language: '언어',

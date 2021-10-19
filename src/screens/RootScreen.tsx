@@ -23,7 +23,10 @@ const RootScreen = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main">
         <Stack.Screen
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            headerTitle: formatMessage('screen/main'),
+          }}
           name="Main"
           component={MainScreen}
         />
