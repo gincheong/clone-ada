@@ -1,16 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // interfaces
-import { languages, LocaleState } from './LocaleInterfaces';
+import { Locales, LocaleState } from './LocaleInterfaces';
+import { DefaultValue } from '../asyncStorage/interfaces';
 
 const initialState: LocaleState = {
-  locale: 'ko',
+  locale: DefaultValue.locale,
 };
 
 const LocaleSlice = createSlice({
   name: 'Locale',
   initialState,
   reducers: {
-    setLocale: (state, action: PayloadAction<keyof typeof languages>) => {
+    setLocale: (state, action: PayloadAction<Locales>) => {
       state.locale = action.payload;
     },
   },

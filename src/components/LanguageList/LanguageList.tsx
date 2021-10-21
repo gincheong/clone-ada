@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import LanguageListItem from './LanguageListItem';
 import HorizontalRule from '../HorizontalRule/HorizontalRule';
 // interfaces
-import { languages } from '../../reducers/LocaleInterfaces';
+import { languages, Locales } from '../../reducers/LocaleInterfaces';
 // styles
 import theme from '../../assets/theme';
 
@@ -16,10 +16,7 @@ const LanguageList = () => {
 
         return (
           <View key={idx}>
-            <LanguageListItem
-              locale={key as keyof typeof languages}
-              display={val}
-            />
+            <LanguageListItem locale={key as Locales} display={val} />
             {idx < Object.keys(languages).length - 1 && (
               <HorizontalRule color={theme.color.black} width={1} />
             )}

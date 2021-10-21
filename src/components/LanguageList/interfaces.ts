@@ -1,7 +1,7 @@
 // interfaces
-import { languages } from '../../reducers/LocaleInterfaces';
+import { Locales } from '../../reducers/LocaleInterfaces';
 
 export interface LanguageListItemProps {
-  locale: keyof typeof languages;
+  locale: Locales;
   display: string;
 }

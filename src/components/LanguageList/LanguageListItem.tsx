@@ -4,6 +4,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 // actions
 import { LocaleAction } from '../../reducers/LocaleSlice';
+// storage
+import { setStorageData } from '../../asyncStorage/AsyncStorage';
 // interfaces
 import { RootState } from '../../stores';
 import { LanguageListItemProps } from './interfaces';
@@ -14,6 +16,13 @@ const LanguageListItem = (props: LanguageListItemProps) => {
   const { display } = props;
   const { locale } = useSelector((state: RootState) => state.LocaleReducer);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const setLocaleStorage = async () => {
+      await setStorageData('locale', locale);
+    };
+    setLocaleStorage();
+  }, [locale]);
 
   return (
     <TouchableOpacity
