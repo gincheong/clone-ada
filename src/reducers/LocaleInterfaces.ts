@@ -4,5 +4,7 @@ export const languages = {
 };
 
 export interface LocaleState {
-  locale: keyof typeof languages;
+  locale: Locales;
 }
+
+export type Locales = keyof typeof languages;
