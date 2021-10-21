@@ -37,7 +37,7 @@ const Footer = () => {
     <View style={styles.container}>
       <Text style={styles.text}>ada</Text>
       {onLoading ? (
-        <ActivityIndicator style={styles.indicator} />
+        <ActivityIndicator style={styles.indicator} color={theme.color.black} />
       ) : (
         <TouchableOpacity onPress={onPressUndo}>
           <EvilIcons name="undo" size={theme.font.xlarge} />
