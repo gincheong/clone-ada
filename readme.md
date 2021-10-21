@@ -16,7 +16,7 @@ yarn start
 
 혹은 [https://expo.dev/@gincheong/cloneada](https://expo.dev/@gincheong/cloneada) 링크를 통하면, 제가 Publish한 앱을 마찬가지로 Expo Go 앱으로 실행할 수 있습니다.
 
-[7d73f81](https://github.com/gincheong/clone-ada/commit/7d73f8154e217b3e33eff7f188938b42b2f40de7)까지 반영되어 있습니다. (10/19 22:39)
+[ca8ea98](https://github.com/gincheong/clone-ada/commit/ca8ea98060ff5d4dd10fbfe3a05553da488bc170)까지 반영되어 있습니다. (10/21 23:49)
 
 ## 구현사항 (스크린샷)
 
