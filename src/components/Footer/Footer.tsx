@@ -18,11 +18,13 @@ import theme from '../../assets/theme';
 
 const Footer = () => {
   const { onLoading } = useSelector((state: RootState) => state.BalloonReducer);
-  const { isOpened } = useSelector((state: RootState) => state.DrawerReducer);
+  const { isDrawerOpened } = useSelector(
+    (state: RootState) => state.DrawerReducer,
+  );
   const dispatch = useDispatch();
 
   const onPressMenu = () => {
-    if (isOpened) {
+    if (isDrawerOpened) {
       dispatch(DrawerAction.closeDrawer());
     } else if (!onLoading) {
       dispatch(DrawerAction.openDrawer());

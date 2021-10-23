@@ -28,21 +28,23 @@ import AnimationPreset from '../assets/animation';
 const DRAWER_WIDTH = Dimensions.get('window').width / 2 + 50;
 
 const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
-  const { isOpened } = useSelector((state: RootState) => state.DrawerReducer);
+  const { isDrawerOpened } = useSelector(
+    (state: RootState) => state.DrawerReducer,
+  );
   const dispatch = useDispatch();
   const { navigation } = props;
 
   const drawerAnimation = React.useRef(new Animated.Value(0)).current;
 
   const closeDrawer = () => {
-    if (isOpened) {
+    if (isDrawerOpened) {
       dispatch(DrawerAction.closeDrawer());
     }
   };
 
   // * Drawer Animation
   React.useEffect(() => {
-    if (isOpened) {
+    if (isDrawerOpened) {
       Animated.timing(drawerAnimation, {
         toValue: -DRAWER_WIDTH,
         easing: AnimationPreset.drawer.easing,
@@ -57,7 +59,7 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
         useNativeDriver: false,
       }).start();
     }
-  }, [isOpened, drawerAnimation]);
+  }, [isDrawerOpened, drawerAnimation]);
 
   return (
     <KeyboardAvoidingView
@@ -66,7 +68,7 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
-            {isOpened ? (
+            {isDrawerOpened ? (
               <TouchableWithoutFeedback onPress={closeDrawer}>
                 <View style={styles.hidden}></View>
               </TouchableWithoutFeedback>

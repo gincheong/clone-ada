@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { DrawerState } from './DrawerInterfaces';
 
 const initialState: DrawerState = {
-  isOpened: false,
+  isDrawerOpened: false,
 };
 
 const DrawerSlice = createSlice({
@@ -11,10 +11,10 @@ const DrawerSlice = createSlice({
   initialState,
   reducers: {
     openDrawer: state => {
-      state.isOpened = true;
+      state.isDrawerOpened = true;
     },
     closeDrawer: state => {
-      state.isOpened = false;
+      state.isDrawerOpened = false;
     },
   },
 });

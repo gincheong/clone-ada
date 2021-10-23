@@ -1,3 +1,3 @@
 export interface DrawerState {
-  isOpened: boolean;
+  isDrawerOpened: boolean;
 }
