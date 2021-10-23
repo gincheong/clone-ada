@@ -77,8 +77,8 @@ const Drawer = (props: DrawerProps) => {
           </Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={onPressClose}>
-        <View style={[styles.listItem, styles.closeButton]}>
+      <TouchableOpacity onPress={onPressClose} style={styles.closeButton}>
+        <View style={[styles.listItem]}>
           <EvilIcons name="close" size={theme.font.xlarge} />
         </View>
       </TouchableOpacity>
