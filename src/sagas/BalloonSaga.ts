@@ -11,6 +11,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 // animations
 import AnimationPreset from '../assets/animation';
 import { RootState } from '../stores';
+import { BalloonState } from '../reducers/BalloonInterfaces';
 
 function* getState(reducer: keyof RootState) {
   const state: RootState = yield select();
@@ -18,9 +19,8 @@ function* getState(reducer: keyof RootState) {
 }
 
 function* prevConversation() {
-  const { conversationIdx, onLoading, onMovingNext } = yield* getState(
-    'BalloonReducer',
-  );
+  const state = yield* getState('BalloonReducer');
+  const { conversationIdx, onLoading, onMovingNext } = state as BalloonState;
 
   if (conversationIdx > 0 && !onLoading && !onMovingNext) {
     yield put(BalloonAction.prevConversationSuccess());
@@ -35,7 +35,8 @@ function* watchPrevConversation() {
 }
 
 function* nextConversation(action: PayloadAction<string>) {
-  const { onMovingPrev } = yield* getState('BalloonReducer');
+  const state = yield* getState('BalloonReducer');
+  const { onMovingPrev } = state as BalloonState;
 
   if (onMovingPrev) {
     return;
