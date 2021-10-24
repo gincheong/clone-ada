@@ -14,65 +14,65 @@ const WINDOW_HEIGHT = Dimensions.get('window').width;
 const Balloon = () => {
   const { conversationIdx, conversations, onMovingPrev, onMovingNext } =
     useSelector((state: RootState) => state.BalloonReducer);
-  const moveAnimation = React.useRef(new Animated.Value(0)).current;
-  const fadeInAnimation = React.useRef(new Animated.Value(1)).current;
+  const balloonAnimatedValue = React.useRef(new Animated.Value(0)).current;
+  const fadeInAnimatedValue = React.useRef(new Animated.Value(1)).current;
   const currentConversation = conversations[conversationIdx];
 
   // * Moving Next
   React.useEffect(() => {
     if (onMovingNext) {
-      fadeInAnimation.setValue(0);
+      fadeInAnimatedValue.setValue(0);
 
-      Animated.timing(fadeInAnimation, {
+      Animated.timing(fadeInAnimatedValue, {
         toValue: 1,
         easing: AnimationPreset.opacity.easing,
         duration: AnimationPreset.opacity.duration,
         useNativeDriver: false,
       }).start();
 
-      moveAnimation.setValue(-WINDOW_HEIGHT);
+      balloonAnimatedValue.setValue(-WINDOW_HEIGHT);
 
-      Animated.timing(moveAnimation, {
+      Animated.timing(balloonAnimatedValue, {
         toValue: 0,
         easing: AnimationPreset.balloon.easing,
         duration: AnimationPreset.balloon.duration,
         useNativeDriver: false,
       }).start();
     }
-  }, [fadeInAnimation, moveAnimation, onMovingNext]);
+  }, [fadeInAnimatedValue, balloonAnimatedValue, onMovingNext]);
 
   // * Moving Prev
   React.useEffect(() => {
     if (onMovingPrev) {
-      fadeInAnimation.setValue(1);
+      fadeInAnimatedValue.setValue(1);
 
-      Animated.timing(fadeInAnimation, {
+      Animated.timing(fadeInAnimatedValue, {
         toValue: 0,
         easing: AnimationPreset.opacity.easing,
         duration: AnimationPreset.opacity.duration,
         useNativeDriver: false,
       }).start();
 
-      moveAnimation.setValue(0);
+      balloonAnimatedValue.setValue(0);
 
-      Animated.timing(moveAnimation, {
+      Animated.timing(balloonAnimatedValue, {
         toValue: -WINDOW_HEIGHT,
         easing: AnimationPreset.balloon.easing,
         duration: AnimationPreset.balloon.duration,
         useNativeDriver: false,
       }).start();
     } else {
-      moveAnimation.setValue(0);
-      fadeInAnimation.setValue(1);
+      balloonAnimatedValue.setValue(0);
+      fadeInAnimatedValue.setValue(1);
     }
-  }, [fadeInAnimation, moveAnimation, onMovingPrev]);
+  }, [fadeInAnimatedValue, balloonAnimatedValue, onMovingPrev]);
 
   return (
     <Animated.View
       style={{
         ...styles.container,
-        opacity: fadeInAnimation,
-        bottom: moveAnimation,
+        opacity: fadeInAnimatedValue,
+        bottom: balloonAnimatedValue,
       }}>
       <Bot {...currentConversation} />
       <User {...currentConversation} />

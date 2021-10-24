@@ -34,7 +34,7 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
   const dispatch = useDispatch();
   const { navigation } = props;
 
-  const drawerAnimation = React.useRef(new Animated.Value(0)).current;
+  const drawerAnimatedValue = React.useRef(new Animated.Value(0)).current;
 
   const closeDrawer = () => {
     if (isDrawerOpened) {
@@ -45,21 +45,21 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
   // * Drawer Animation
   React.useEffect(() => {
     if (isDrawerOpened) {
-      Animated.timing(drawerAnimation, {
+      Animated.timing(drawerAnimatedValue, {
         toValue: -DRAWER_WIDTH,
         easing: AnimationPreset.drawer.easing,
         duration: AnimationPreset.drawer.duration,
         useNativeDriver: false,
       }).start();
     } else {
-      Animated.timing(drawerAnimation, {
+      Animated.timing(drawerAnimatedValue, {
         toValue: 0,
         easing: AnimationPreset.drawer.easing,
         duration: AnimationPreset.drawer.duration,
         useNativeDriver: false,
       }).start();
     }
-  }, [isDrawerOpened, drawerAnimation]);
+  }, [isDrawerOpened, drawerAnimatedValue]);
 
   return (
     <KeyboardAvoidingView
@@ -67,7 +67,7 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <Animated.View style={{ ...styles.main, left: drawerAnimation }}>
+          <Animated.View style={{ ...styles.main, left: drawerAnimatedValue }}>
             {isDrawerOpened ? (
               <TouchableWithoutFeedback onPress={closeDrawer}>
                 <View style={styles.hidden}></View>
@@ -83,7 +83,7 @@ const MainScreen = (props: StackScreenProps<StackProps, 'Main'>) => {
             style={{
               ...styles.drawerContainer,
               left: Animated.add(
-                drawerAnimation,
+                drawerAnimatedValue,
                 Dimensions.get('window').width,
               ),
             }}>
