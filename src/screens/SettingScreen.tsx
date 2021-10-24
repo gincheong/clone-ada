@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useGlobalize } from 'react-native-globalize';
+// components
+import ListItem from '../components/ListItem/ListItem';
 // interfaces
 import { StackProps } from './interfaces';
 // globalize
@@ -13,6 +15,8 @@ import theme from '../assets/theme';
 
 loadSettingMessages();
 
+const iconSize = theme.font.xlarge + 10;
+
 const SettingScreen = ({
   navigation,
 }: StackScreenProps<StackProps, 'Setting'>) => {
@@ -21,77 +25,54 @@ const SettingScreen = ({
   return (
     <View style={styles.container}>
       {/* Setting */}
-      <TouchableOpacity>
-        <View style={styles.listItem}>
+      <ListItem
+        icon={
           <MaterialIcons
             name="account-circle"
-            size={theme.font.xlarge + 10}
+            size={iconSize}
             color={theme.color.accent1}
           />
-          <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle}>
-              {formatMessage('setting/setting')}
-            </Text>
-            <Text style={styles.listItemDescription}>
-              {formatMessage('setting/settingDesc')}
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
+        }
+        title={formatMessage('setting/setting')}
+        description={formatMessage('setting/settingDesc')}
+      />
       {/* Privacy */}
-      <TouchableOpacity>
-        <View style={styles.listItem}>
+      <ListItem
+        icon={
           <MaterialIcons
             name="privacy-tip"
-            size={theme.font.xlarge + 10}
+            size={iconSize}
             color={theme.color.accent2}
           />
-          <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle}>
-              {formatMessage('setting/privacy')}
-            </Text>
-            <Text style={styles.listItemDescription}>
-              {formatMessage('setting/privacyDesc')}
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
+        }
+        title={formatMessage('setting/privacy')}
+        description={formatMessage('setting/privacyDesc')}
+      />
       {/* Notification */}
-      <TouchableOpacity>
-        <View style={styles.listItem}>
+      <ListItem
+        icon={
           <MaterialIcons
             name="notifications"
-            size={theme.font.xlarge + 10}
+            size={iconSize}
             color={theme.color.accent3}
           />
-          <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle}>
-              {formatMessage('setting/notification')}
-            </Text>
-            <Text style={styles.listItemDescription}>
-              {formatMessage('setting/notificationDesc')}
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
+        }
+        title={formatMessage('setting/notification')}
+        description={formatMessage('setting/notificationDesc')}
+      />
       {/* Language */}
-      <TouchableOpacity onPress={() => navigation.navigate('Language')}>
-        <View style={styles.listItem}>
+      <ListItem
+        icon={
           <MaterialCommunityIcons
             name="alphabet-latin"
-            size={theme.font.xlarge + 10}
+            size={iconSize}
             color={theme.color.dark}
           />
-          <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle}>
-              {formatMessage('setting/language')}
-            </Text>
-            <Text style={styles.listItemDescription}>
-              {formatMessage('setting/languageDesc')}
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
+        }
+        title={formatMessage('setting/language')}
+        description={formatMessage('setting/languageDesc')}
+        onPress={() => navigation.navigate('Language')}
+      />
     </View>
   );
 };
@@ -99,22 +80,7 @@ const SettingScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 15,
-  },
-  listItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-  },
-  listItemTextContainer: {
-    marginLeft: 30,
-  },
-  listItemTitle: {
-    fontSize: theme.font.large,
-  },
-  listItemDescription: {
-    fontSize: theme.font.xsmall,
+    padding: 25,
   },
 });
 

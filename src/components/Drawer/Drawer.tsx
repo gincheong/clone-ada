@@ -13,8 +13,11 @@ import { StackProps } from '../../screens/interfaces';
 import loadDrawerMessages from '../../globalize/DrawerMessages';
 // styles
 import theme from '../../assets/theme';
+import ListItem from '../ListItem/ListItem';
 
 loadDrawerMessages();
+
+const iconSize = theme.font.xlarge;
 
 const Drawer = (props: DrawerProps) => {
   const { navigation } = props;
@@ -49,39 +52,38 @@ const Drawer = (props: DrawerProps) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigateTo('Setting')}>
-        <View style={styles.listItem}>
-          <EvilIcons name="gear" size={theme.font.xlarge} />
-          <Text style={styles.listItemText}>
-            {formatMessage('drawer/setting')}
-          </Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigateTo('Profile')}>
-        <View style={styles.listItem}>
-          <EvilIcons name="user" size={theme.font.xlarge} />
-          <Text style={styles.listItemText}>
-            {formatMessage('drawer/profile')}
-          </Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={restartConversation}>
-        <View style={styles.listItem}>
+      {/* Setting */}
+      <ListItem
+        icon={<EvilIcons name="gear" size={iconSize} />}
+        title={formatMessage('drawer/setting')}
+        onPress={() => navigateTo('Setting')}
+      />
+      {/* Profile */}
+      <ListItem
+        icon={<EvilIcons name="user" size={iconSize} />}
+        title={formatMessage('drawer/profile')}
+        onPress={() => navigateTo('Profile')}
+      />
+      {/* Refresh */}
+      <ListItem
+        icon={
           <EvilIcons
             name="refresh"
-            size={theme.font.xlarge}
+            size={iconSize}
             color={theme.color.accent1}
           />
-          <Text style={{ ...styles.listItemText, color: theme.color.accent1 }}>
-            {formatMessage('drawer/restart')}
-          </Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={onPressClose} style={styles.closeButton}>
-        <View style={[styles.listItem]}>
-          <EvilIcons name="close" size={theme.font.xlarge} />
-        </View>
-      </TouchableOpacity>
+        }
+        title={formatMessage('drawer/restart')}
+        onPress={restartConversation}
+      />
+      {/* Close */}
+      <View style={styles.closeButton}>
+        <ListItem
+          icon={<EvilIcons name="close" size={iconSize} />}
+          centerMargin={0}
+          onPress={onPressClose}
+        />
+      </View>
     </View>
   );
 };
@@ -89,17 +91,9 @@ const Drawer = (props: DrawerProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 10,
     justifyContent: 'flex-end',
     backgroundColor: theme.color.light,
-  },
-  listItem: {
-    padding: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  listItemText: {
-    fontSize: theme.font.normal,
-    marginLeft: 10,
   },
   closeButton: {
     alignSelf: 'flex-end',
