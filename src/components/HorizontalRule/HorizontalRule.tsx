@@ -1,8 +1,14 @@
-import { hasProxies } from 'immer/dist/internal';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 // interfaces
 import { HorizontalRuleProps } from './interfaces';
+// styles
+import theme from '../../assets/theme';
+
+const defaultValue = {
+  color: theme.color.black,
+  width: 1,
+};
 
 const HorizontalRule = (props: HorizontalRuleProps) => {
   const { color, width } = props;
@@ -11,8 +17,8 @@ const HorizontalRule = (props: HorizontalRuleProps) => {
     <View
       style={{
         ...styles.hr,
-        borderBottomColor: color,
-        borderBottomWidth: width,
+        borderBottomColor: color ?? defaultValue.color,
+        borderBottomWidth: width ?? defaultValue.width,
       }}
     />
   );

@@ -1,4 +1,4 @@
 export interface HorizontalRuleProps {
-  width: number;
-  color: string;
+  width?: number;
+  color?: string;
 }
