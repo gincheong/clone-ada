@@ -74,6 +74,7 @@ const Drawer = (props: DrawerProps) => {
           />
         }
         title={formatMessage('drawer/restart')}
+        titleColor={theme.color.accent1}
         onPress={restartConversation}
       />
       {/* Close */}

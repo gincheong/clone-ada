@@ -8,6 +8,7 @@ import theme from '../../assets/theme';
 
 const defaultValue = {
   titleSize: theme.font.large,
+  titleColor: theme.color.black,
   descriptionSize: theme.font.xsmall,
   iconSize: theme.font.large,
   centerMargin: 20,
@@ -17,6 +18,7 @@ const ListItem = (props: ListItemProps) => {
   const {
     title,
     titleSize,
+    titleColor,
     description,
     descriptionSize,
     icon,
@@ -42,6 +44,7 @@ const ListItem = (props: ListItemProps) => {
             <Text
               style={{
                 fontSize: titleSize ?? defaultValue.titleSize,
+                color: titleColor ?? defaultValue.titleColor,
               }}>
               {title}
             </Text>
